@@ -16,6 +16,7 @@
     ]
   },
   "dependencies": {
+    "@1hive/1hive-ui": "^1.0.5",
     "@ant-design/icons": "^4.2.2",
     "@apollo/react-hooks": "^4.0.0",
     "@ethersproject/address": "^5.0.5",
@@ -49,14 +50,16 @@
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
+    "reqwest": "^2.0.5",
     "sass": "^1.32.6",
     "sass-loader": "10.0.5",
-    "web3modal": "^1.9.1",
-    "reqwest": "^2.0.5"
+    "styled-components": "^5.2.1",
+    "web3modal": "^1.9.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^6.12.2",
     "@types/react": "^16.9.19",
+    "babel-plugin-macros": "^3.0.1",
     "chalk": "^4.1.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -73,7 +76,7 @@
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "start": "react-scripts start",
+    "start": "npx copy-aragon-ui-assets ./public && react-scripts start",
     "test": "react-scripts test",
     "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./src/**/*",
     "ipfs": "node ./scripts/ipfs.js",

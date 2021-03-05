@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
-import { Layout, Row, Col, Button } from "antd";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
@@ -43,7 +42,7 @@ import styles from "./App.module.scss"
 */
 import { INFURA_ID, IS_DEV } from "./constants";
 import { DownCircleOutlined, UpCircleOutlined } from "@ant-design/icons";
-const { Content, Footer } = Layout;
+import { Button, Main } from "@1hive/1hive-ui";
 
 // 😬 Sorry for all the console logging 🤡
 const DEBUG = IS_DEV;
@@ -148,22 +147,28 @@ export default function App(props) {
   const hideButtonRef = React.createRef();
 
   const hideFaucet = () => {
-    wrapperRef.current.style.display = "none";
-    hideButtonRef.current.style.display = "none";
-    showButtonRef.current.style.display = "block";
+    if (wrapperRef.current)
+      wrapperRef.current.style.display = "none";
+    if (hideButtonRef.current)
+      hideButtonRef.current.style.display = "none";
+    if (showButtonRef.current)
+      showButtonRef.current.style.display = "block";
     localStorage.setItem("hideFaucet", true);
   };
 
   const showFaucet = () => {
-    wrapperRef.current.style.display = "block";
-    hideButtonRef.current.style.display = "block";
-    showButtonRef.current.style.display = "none";
+    if (wrapperRef.current)
+      wrapperRef.current.style.display = "block";
+    if (hideButtonRef.current)
+      hideButtonRef.current.style.display = "block";
+    if (showButtonRef.current)
+      showButtonRef.current.style.display = "none";
     localStorage.setItem("hideFaucet", false);
   };
 
   return (
-    <BrowserRouter>
-      <Layout>
+    <Main>
+      <BrowserRouter>
         <AppHeader
           route={route}
           setRoute={setRoute}
@@ -177,31 +182,31 @@ export default function App(props) {
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           blockExplorer={blockExplorer}
         />
-        <Content>
-          <Switch>
-            <Route path="/quests">
-              <QuestList
-                address={address}
-                yourLocalBalance={yourLocalBalance}
-                mainnetProvider={mainnetProvider}
-                price={price}
-              />
-            </Route>
-            <Route exact path="/contract">
-              {/*
+        
+        <Switch>
+          <Route path="/quests">
+            <QuestList
+              address={address}
+              yourLocalBalance={yourLocalBalance}
+              mainnetProvider={mainnetProvider}
+              price={price}
+            />
+          </Route>
+          <Route exact path="/contract">
+            {/*
                   🎛 this scaffolding is full of commonly used components
                   this <Contract/> component will automatically parse your ABI
                   and give you a form to interact with it locally
               */}
-              <Contract
-                name="YourContract"
-                signer={userProvider.getSigner()}
-                provider={localProvider}
-                address={address}
-                blockExplorer={blockExplorer}
-              />
+            <Contract
+              name="YourContract"
+              signer={userProvider.getSigner()}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+            />
 
-              {/* Uncomment to display and interact with an external contract (DAI on mainnet):
+            {/* Uncomment to display and interact with an external contract (DAI on mainnet):
         <Contract
           name="DAI"
           customContract={mainnetDAIContract}
@@ -210,108 +215,107 @@ export default function App(props) {
           address={address}
           blockExplorer={blockExplorer}
         /> */}
-            </Route>
-            <Route path="/hints">
-              <Hints
-                address={address}
-                yourLocalBalance={yourLocalBalance}
-                mainnetProvider={mainnetProvider}
-                price={price}
-              />
-            </Route>
-            <Route path="/exampleui">
-              <ExampleUI
-                address={address}
-                userProvider={userProvider}
-                mainnetProvider={mainnetProvider}
-                localProvider={localProvider}
-                yourLocalBalance={yourLocalBalance}
-                price={price}
-                tx={tx}
-                writeContracts={writeContracts}
-                readContracts={readContracts}
-                purpose={purpose}
-                setPurposeEvents={setPurposeEvents}
-              />
-            </Route>
-            <Route path="/subgraph">
-              <Subgraph
-                subgraphUri={props.subgraphUri}
-                tx={tx}
-                writeContracts={writeContracts}
-                mainnetProvider={mainnetProvider}
-              />
-            </Route>
-          </Switch>
-        </Content>
+          </Route>
+          <Route path="/hints">
+            <Hints
+              address={address}
+              yourLocalBalance={yourLocalBalance}
+              mainnetProvider={mainnetProvider}
+              price={price}
+            />
+          </Route>
+          <Route path="/exampleui">
+            <ExampleUI
+              address={address}
+              userProvider={userProvider}
+              mainnetProvider={mainnetProvider}
+              localProvider={localProvider}
+              yourLocalBalance={yourLocalBalance}
+              price={price}
+              tx={tx}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              purpose={purpose}
+              setPurposeEvents={setPurposeEvents}
+            />
+          </Route>
+          <Route path="/subgraph">
+            <Subgraph
+              subgraphUri={props.subgraphUri}
+              tx={tx}
+              writeContracts={writeContracts}
+              mainnetProvider={mainnetProvider}
+            />
+          </Route>
+        </Switch>
         {/* <Footer style={{ textAlign: "center" }}>
           Honey Quest @2021 Founded by <a href="https://1hive.org/">1Hive</a>
         </Footer> */}
-      </Layout>
 
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <If expression={IS_DEV}>
-        <div className="p-8" style={{ position: "fixed", textAlign: "left", left: 0, bottom: 0 }}>
-          <Button
-            className={append("mb-8", styles.hideFaucet)}
-            ref={hideButtonRef}
-            onClick={() => hideFaucet()}
-            type="link"
-            icon={<DownCircleOutlined style={{ fontSize: "32px" }} />}
-          ></Button>
-          <Button
-            className={append("mb-8", styles.showFaucet)}
-            ref={showButtonRef}
-            onClick={() => showFaucet()}
-            type="link"
-            icon={<UpCircleOutlined style={{ fontSize: "32px" }} />}
-          ></Button>
-          <div ref={wrapperRef} className="wrapper">
-            <Row align="middle" gutter={[4, 4]}>
-              <Col span={8}>
-                <Ramp price={price} address={address} />
-              </Col>
+        {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
+        <If expression={IS_DEV}>
+          <div className="p-8" style={{ position: "fixed", textAlign: "left", left: 0, bottom: 0 }}>
+            <Button
+              className={append("mb-8", styles.hideFaucet)}
+              ref={hideButtonRef}
+              onClick={() => hideFaucet()}
+              type="link"
+              icon={<DownCircleOutlined style={{ fontSize: "32px" }} />}
+            ></Button>
+            <Button
+              className={append("mb-8", styles.showFaucet)}
+              ref={showButtonRef}
+              onClick={() => showFaucet()}
+              type="link"
+              icon={<UpCircleOutlined style={{ fontSize: "32px" }} />}
+            ></Button>
+            <div ref={wrapperRef} className="wrapper">
+              <div align="middle" gutter={[4, 4]}>
+                <div span={8}>
+                  <Ramp price={price} address={address} />
+                </div>
 
-              <Col span={8} className="center" >
-                <GasGauge gasPrice={gasPrice} />
-              </Col>
-              <Col span={8} className="center" >
-                <Button
-                  onClick={() => {
-                    window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-                  }}
-                  size="large"
-                  shape="round"
-                >
-                  <span className="mr-8" role="img" aria-label="support">
-                    💬
+                <div span={8} className="center" >
+                  <GasGauge gasPrice={gasPrice} />
+                </div>
+                <div span={8} className="center" >
+                  <Button
+                    onClick={() => {
+                      window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
+                    }}
+                    size="large"
+                    shape="round"
+                  >
+                    <span className="mr-8" role="img" aria-label="support">
+                      💬
                 </span>
                 Support
               </Button>
-              </Col>
-            </Row>
+                </div>
+              </div>
 
-            <Row align="middle" gutter={[4, 4]}>
-              <Col span={24}>
-                {
-                  /*  if the local provider has a signer, let's show the faucet:  */
-                  localProvider &&
-                    localProvider.connection &&
-                    localProvider.connection.url &&
-                    localProvider.connection.url.indexOf(window.location.hostname) >= 0 &&
-                    !process.env.REACT_APP_PROVIDER &&
-                    price > 1 ? (
+              <div align="middle" gutter={[4, 4]}>
+                <div span={24}>
+                  {
+                    /*  if the local provider has a signer, let's show the faucet:  */
+                    localProvider &&
+                      localProvider.connection &&
+                      localProvider.connection.url &&
+                      localProvider.connection.url.indexOf(window.location.hostname) >= 0 &&
+                      !process.env.REACT_APP_PROVIDER &&
+                      price > 1 ? (
                       <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
                     ) : (
                       ""
                     )
-                }
-              </Col>
-            </Row>
+                  }
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </If>
-    </BrowserRouter>
+        </If>
+      </BrowserRouter>
+    </Main>
   );
 }
 /*
