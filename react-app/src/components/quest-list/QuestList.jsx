@@ -12,9 +12,9 @@ import {
 
 import { PlusSquareOutlined } from "@ant-design/icons";
 
-import { append } from "../helpers";
-import { CRYPTOS, QUEST_STATUS } from "../constants";
-import { Blockie } from "../components";
+import { append } from "../../helpers";
+import { CRYPTOS, QUEST_STATUS } from "../../constants";
+import { Blockie } from "../..";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { RangePicker } = DatePicker;

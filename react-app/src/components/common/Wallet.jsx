@@ -4,7 +4,7 @@ import { Tooltip, Spin, Modal, Button, Typography } from "antd";
 import QR from "qrcode.react";
 import { parseEther } from "@ethersproject/units";
 import { useUserAddress } from "eth-hooks";
-import { Transactor } from "../helpers";
+import { Transactor } from "../../helpers";
 import Address from "./Address";
 import Balance from "./Balance";
 import AddressInput from "./AddressInput";

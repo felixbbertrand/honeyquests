@@ -34,13 +34,13 @@
     "ship": "yarn workspace @scaffold-eth/react-app ship",
     "generate": "yarn workspace @scaffold-eth/hardhat generate",
     "account": "yarn workspace @scaffold-eth/hardhat account",
-    "mine": "cd packages/hardhat && npx hardhat mine",
-    "wallet": "cd packages/hardhat && npx hardhat wallet",
-    "fundedwallet": "cd packages/hardhat && npx hardhat fundedwallet",
-    "flatten": "cd packages/hardhat && npx hardhat flatten",
+    "mine": "cd hardhat && npx hardhat mine",
+    "wallet": "cd hardhat && npx hardhat wallet",
+    "fundedwallet": "cd hardhat && npx hardhat fundedwallet",
+    "flatten": "cd hardhat && npx hardhat flatten",
     "graph-run-node": "cd docker/graph-node && docker-compose up",
     "graph-remove-node": "cd docker/graph-node && docker-compose down",
-    "graph-prepare": "mustache packages/subgraph/config/config.json packages/subgraph/src/subgraph.template.yaml > packages/subgraph/subgraph.yaml",
+    "graph-prepare": "mustache subgraph/config/config.json subgraph/src/subgraph.template.yaml > subgraph/subgraph.yaml",
     "graph-codegen": "yarn workspace @scaffold-eth/subgraph graph codegen",
     "graph-build": "yarn workspace @scaffold-eth/subgraph graph build",
     "graph-create-local": "yarn workspace @scaffold-eth/subgraph graph create --node http://localhost:8020/ scaffold-eth/your-contract",
@@ -51,7 +51,7 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "*"
     ],
     "nohoist": [
       "**/@graphprotocol/graph-ts",

@@ -1,16 +1,16 @@
-packages/subgraph/subgraph.yaml
-packages/subgraph/generated
-packages/hardhat/*.txt
+subgraph/subgraph.yaml
+subgraph/generated
+hardhat/*.txt
 **/aws.json
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 **/node_modules
-packages/hardhat/artifacts
-packages/hardhat/cache
+hardhat/artifacts
+hardhat/cache
 
 docker/**/data
 
-packages/subgraph/config/config.json
+subgraph/config/config.json
 
 # dependencies
 /node_modules

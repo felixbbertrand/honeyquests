@@ -59,7 +59,7 @@ const mainnetProvider = new JsonRpcProvider("https://mainnet.infura.io/v3/" + IN
 console.log("window.location.hostname", window.location.hostname);
 // 🏠 Your local provider is usually pointed at your local blockchain
 const localProviderUrl = "http://" + window.location.hostname + ":8545"; // for xdai: https://dai.poa.network
-// as you deploy to other networks you can set REACT_APP_PROVIDER=https://dai.poa.network in packages/react-app/.env
+// as you deploy to other networks you can set REACT_APP_PROVIDER=https://dai.poa.network in react-app/.env
 const localProviderUrlFromEnv = process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : localProviderUrl;
 if (DEBUG) console.log("🏠 Connecting to provider:", localProviderUrlFromEnv);
 const localProvider = new JsonRpcProvider(localProviderUrlFromEnv);
@@ -182,7 +182,7 @@ export default function App(props) {
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           blockExplorer={blockExplorer}
         />
-        
+
         <Switch>
           <Route path="/quests">
             <QuestList

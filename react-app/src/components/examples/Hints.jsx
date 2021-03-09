@@ -13,7 +13,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         <span style={{ marginRight: 8 }}>👷</span>
         Edit your <b>contract</b> in
         <span style={{ marginLeft: 4, backgroundColor: "#f9f9f9", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
-          packages/hardhat/contracts
+          hardhat/contracts
         </span>
       </div>
 
@@ -29,7 +29,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         <span style={{ marginRight: 8 }}>🚀</span>
         Your <b>contract artifacts</b> are automatically injected into your frontend at
         <span style={{ marginLeft: 4, backgroundColor: "#f9f9f9", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
-          packages/react-app/src/contracts/
+          react-app/src/contracts/
         </span>
       </div>
 
@@ -37,7 +37,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         <span style={{ marginRight: 8 }}>🎛</span>
         Edit your <b>frontend</b> in
         <span style={{ marginLeft: 4, backgroundColor: "#f9f9f9", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
-          packages/reactapp/src/App.js
+          reactapp/src/App.js
         </span>
       </div>
 
@@ -106,7 +106,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         <span style={{ marginRight: 8 }}>📡</span>
         deploy to a testnet or mainnet by editing
         <span style={{ marginLeft: 4, backgroundColor: "#f9f9f9", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
-          packages/hardhat/hardhat.config.js
+          hardhat/hardhat.config.js
         </span>
         and running
         <span style={{ marginLeft: 4, backgroundColor: "#f1f1f1", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
@@ -122,7 +122,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         </span>
         will create a deployer account in
         <span style={{ marginLeft: 4, backgroundColor: "#f9f9f9", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
-          packages/hardhat
+          hardhat
         </span>
         <div style={{ marginTop: 8 }}>(use <span style={{ marginLeft: 4, backgroundColor: "#f1f1f1", padding: 4, borderRadius: 4, fontWeight: "bolder" }}>
           yarn run account

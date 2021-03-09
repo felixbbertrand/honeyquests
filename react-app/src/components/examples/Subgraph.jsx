@@ -118,7 +118,7 @@ function Subgraph(props) {
         <span style={{ marginRight: 8 }}>🖍️</span>
             Edit your <b>local subgraph</b> in
             <span style={highlight}>
-          packages/subgraph/src
+          subgraph/src
             </span>
              (learn more about subgraph definition <a href="https://thegraph.com/docs/define-a-subgraph" target="_blank" rel="noopener noreferrer">here</a>)
           </div>
