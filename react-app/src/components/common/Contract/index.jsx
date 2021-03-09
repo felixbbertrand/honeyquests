@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { Card } from "antd";
-import { useContractLoader, useContractExistsAtAddress } from "../../hooks";
+import { useContractLoader, useContractExistsAtAddress } from "../../../hooks";
 import DisplayVariable from "./DisplayVariable";
 import FunctionForm from "./FunctionForm";
-import Address from "../Address";
+import { IdentityBadge } from "@1hive/1hive-ui";
 
 const noContractDisplay = (
   <div>
@@ -83,7 +83,7 @@ export default function Contract({ customContract, account, gasPrice, signer, pr
           <div>
             {name}
             <div style={{ float: "right" }}>
-              <Address interactable={true} size="short" value={address} ensProvider={provider} blockExplorer={blockExplorer} />
+              <IdentityBadge compact value={address} networkType={provider} />
               {account}
             </div>
           </div>

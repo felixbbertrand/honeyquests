@@ -1,10 +1,11 @@
+
 import React, { useCallback, useEffect, useState } from "react";
-import "antd/dist/antd.css";
 import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
+import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
-import { append, Transactor } from "./helpers";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import {
   useExchangePrice,
   useGasPrice,
@@ -14,34 +15,13 @@ import {
   useEventListener,
   useBalance,
 } from "./hooks";
-import { AppHeader, Contract, Ramp, GasGauge, Faucet, If } from "./components";
+import { append, Transactor } from "./helpers";
+import { AppHeader, AppSidepanel, Ramp, GasGauge, Faucet, If } from "./components/common";
 import { formatEther } from "@ethersproject/units";
-import { Switch, Route } from "react-router-dom";
-import { Hints, ExampleUI, Subgraph, QuestList } from "./views";
-import { BrowserRouter } from "react-router-dom";
-import Web3 from "web3";
+import { QuestList } from "./components/views";
 import styles from "./App.module.scss"
-//import Hints from "./Hints";
-/*
-    Welcome to 🏗 scaffold-eth !
-
-    Code:
-    https://github.com/austintgriffith/scaffold-eth
-
-    Support:
-    https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA
-    or DM @austingriffith on twitter or telegram
-
-    You should get your own Infura.io ID and put it in `constants.js`
-    (this is your connection to the main Ethereum network for ENS etc.)
-
-
-    📡 EXTERNAL CONTRACTS:
-    You can also bring in contract artifacts in `constants.js`
-    (and then use the `useExternalContractLoader()` hook!)
-*/
 import { INFURA_ID, IS_DEV } from "./constants";
-import { DownCircleOutlined, UpCircleOutlined } from "@ant-design/icons";
+import { DownCircleOutlined, MailOutlined, UpCircleOutlined } from "@ant-design/icons";
 import { Button, Main } from "@1hive/1hive-ui";
 
 // 😬 Sorry for all the console logging 🤡
@@ -167,7 +147,7 @@ export default function App(props) {
   };
 
   return (
-    <Main>
+    <Main layout={false}>
       <BrowserRouter>
         <AppHeader
           route={route}
@@ -182,6 +162,7 @@ export default function App(props) {
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           blockExplorer={blockExplorer}
         />
+        <AppSidepanel></AppSidepanel>
 
         <Switch>
           <Route path="/quests">
@@ -190,61 +171,6 @@ export default function App(props) {
               yourLocalBalance={yourLocalBalance}
               mainnetProvider={mainnetProvider}
               price={price}
-            />
-          </Route>
-          <Route exact path="/contract">
-            {/*
-                  🎛 this scaffolding is full of commonly used components
-                  this <Contract/> component will automatically parse your ABI
-                  and give you a form to interact with it locally
-              */}
-            <Contract
-              name="YourContract"
-              signer={userProvider.getSigner()}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-            />
-
-            {/* Uncomment to display and interact with an external contract (DAI on mainnet):
-        <Contract
-          name="DAI"
-          customContract={mainnetDAIContract}
-          signer={userProvider.getSigner()}
-          provider={mainnetProvider}
-          address={address}
-          blockExplorer={blockExplorer}
-        /> */}
-          </Route>
-          <Route path="/hints">
-            <Hints
-              address={address}
-              yourLocalBalance={yourLocalBalance}
-              mainnetProvider={mainnetProvider}
-              price={price}
-            />
-          </Route>
-          <Route path="/exampleui">
-            <ExampleUI
-              address={address}
-              userProvider={userProvider}
-              mainnetProvider={mainnetProvider}
-              localProvider={localProvider}
-              yourLocalBalance={yourLocalBalance}
-              price={price}
-              tx={tx}
-              writeContracts={writeContracts}
-              readContracts={readContracts}
-              purpose={purpose}
-              setPurposeEvents={setPurposeEvents}
-            />
-          </Route>
-          <Route path="/subgraph">
-            <Subgraph
-              subgraphUri={props.subgraphUri}
-              tx={tx}
-              writeContracts={writeContracts}
-              mainnetProvider={mainnetProvider}
             />
           </Route>
         </Switch>

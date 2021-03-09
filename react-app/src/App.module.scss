@@ -9,3 +9,18 @@
   display: none;
   margin-bottom: 8px;
 }
+
+.title {
+  font-size: x-large;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  & > .logo {
+    width: 40px;
+    margin: 0 8px;
+    float: left;
+    & > img {
+      width: 100%;
+    }
+  }
+}

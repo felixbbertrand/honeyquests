@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Button, Badge } from "antd";
 import { usePoller, useBlockNumber } from "eth-hooks";
+import { IdentityBadge } from "@1hive/1hive-ui";
 // import { WalletOutlined } from '@ant-design/icons';
-
-import Address from "./Address";
 
 export default function Provider(props) {
   const [showMore, setShowMore] = useState(false);
@@ -78,7 +77,7 @@ export default function Provider(props) {
     showWallet = (
       <span>
         <span style={{ padding: 3 }}>
-          <Address minimized value={address} />
+          <IdentityBadge shorten minimized value={address} />
         </span>
       </span>
     );

@@ -5,11 +5,11 @@ import QR from "qrcode.react";
 import { parseEther } from "@ethersproject/units";
 import { useUserAddress } from "eth-hooks";
 import { Transactor } from "../../helpers";
-import Address from "./Address";
 import Balance from "./Balance";
 import AddressInput from "./AddressInput";
 import EtherInput from "./EtherInput";
 import { ethers } from "ethers";
+import { IdentityBadge } from "@1hive/1hive-ui";
 const { Text, Paragraph } = Typography;
 
 /*
@@ -52,8 +52,8 @@ export default function Wallet(props) {
       />
     </Tooltip>
   ) : (
-      ""
-    );
+    ""
+  );
 
   let display;
   let receiveButton;
@@ -108,7 +108,7 @@ export default function Wallet(props) {
       extraPkDisplay.push(
         <div style={{ fontSize: 16, padding: 2, backgroundStyle: "#89e789" }}>
           <a href={"/pk#" + pk}>
-            <Address minimized={true} value={wallet.address} ensProvider={props.ensProvider} /> {wallet.address.substr(0, 6)}
+            <IdentityBadge shorten value={wallet.address} networkType={props.ensProvider} /> {wallet.address.substr(0, 6)}
           </a>
         </div>
       )
@@ -122,7 +122,7 @@ export default function Wallet(props) {
             extraPkDisplay.push(
               <div style={{ fontSize: 16 }}>
                 <a href={"/pk#" + pastpk}>
-                  <Address minimized={true} value={pastwallet.address} ensProvider={props.ensProvider} /> {pastwallet.address.substr(0, 6)}
+                  <IdentityBadge shorten value={pastwallet.address} networkType={props.ensProvider} /> {pastwallet.address.substr(0, 6)}
                 </a>
               </div>
             )
@@ -235,7 +235,7 @@ export default function Wallet(props) {
         visible={open}
         title={
           <div>
-            {selectedAddress ? <Address value={selectedAddress} ensProvider={props.ensProvider} /> : <Spin />}
+            {selectedAddress ? <IdentityBadge value={selectedAddress} networkType={props.ensProvider} /> : <Spin />}
             <div style={{ float: "right", paddingRight: 25 }}>
               <Balance address={selectedAddress} provider={props.provider} dollarMultiplier={props.price} />
             </div>

@@ -8,6 +8,8 @@ hardhat/*.txt
 hardhat/artifacts
 hardhat/cache
 
+react-app/public/aragon-ui
+
 docker/**/data
 
 subgraph/config/config.json
