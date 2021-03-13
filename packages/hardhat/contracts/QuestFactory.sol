@@ -7,7 +7,7 @@ contract QuestFactory {
 
     event QuestCreated(address questAddress, string _content);
 
-    function createQuest(string memory _content) external {
+    function createQuest(string calldata _content) external {
         Quest quest = new Quest(_content, quests.length);
         quests.push(quest);
         emit QuestCreated(address(quest), _content);
@@ -37,7 +37,7 @@ contract Quest {
     uint256 public index;
     address public owner;
 
-    constructor(string memory _content, uint256 _index) {
+    constructor(string memory _content, uint256 _index) public {
         content = _content;
         isEnabled = true;
         index = _index;
@@ -46,7 +46,7 @@ contract Quest {
     function claim(
         address payable player,
         uint256 amount,
-        string memory file
+        string calldata file
     ) external payable {
         require(bytes(file).length != 0, "You must join a file");
         userFiles = file;
